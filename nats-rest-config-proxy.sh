@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# chkconfig: 35 90 12
+# description: nats-rest-config-proxy
+#
+
+# Get function from functions library
+. /etc/init.d/functions
+
+# Start the service nats-rest-config-proxy
+start() {
+        initlog -c "echo -n Starting server: "
+        /usr/local/bin/nats-rest-config-proxy &
+
+        touch /var/lock/subsys/nats-rest-config-proxy
+        success $"nats-rest-config-proxy server startup"
+        echo
+}
+
+# Restart the service nats-rest-config-proxy
+stop() {
+        initlog -c "echo -n Stopping nats-rest-config-proxy server: "
+        killproc nats-rest-config-proxy
+
+        rm -f /var/lock/subsys/nats-rest-config-proxy
+        echo
+}
+
+### main logic ###
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status nats-rest-config-proxy
+        ;;
+  restart|reload|condrestart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+
+exit 0
