@@ -9,7 +9,7 @@
 
 # Start the service prometheus-nats-exporter
 start() {
-        initlog -c "echo -n Starting server: "
+        initlog -c "echo -n Starting prometheus-nats-exporter server: "
         /usr/local/bin/prometheus-nats-exporter &
 
         touch /var/lock/subsys/prometheus-nats-exporter

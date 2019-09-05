@@ -9,7 +9,7 @@
 
 # Start the service nats-rest-config-proxy
 start() {
-        initlog -c "echo -n Starting server: "
+        initlog -c "echo -n Starting nats-rest-config-proxy server: "
         /usr/local/bin/nats-rest-config-proxy &
 
         touch /var/lock/subsys/nats-rest-config-proxy
