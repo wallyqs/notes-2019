@@ -1,0 +1,1 @@
+prometheus-nats-exporter -connz -routez -subz -varz -channelz -serverz -use_internal_server_id -prefix=nats http://127.0.0.1:8222
