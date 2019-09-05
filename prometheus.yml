@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: nats-server-1
+    static_configs:
+    - targets: [ "18.140.97.76:7777"]
+      labels:
+        region: "apsoutheast"
+  - job_name: nats-server-2
+    static_configs:
+    - targets: [ "13.251.43.181:7777"]
+      labels:
+        region: "apsoutheast"
+  - job_name: nats-server-3
+    static_configs:
+    - targets: [ "18.140.113.100:7777"]
+      labels:
+        region: "apsoutheast"
