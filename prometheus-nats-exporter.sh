@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# chkconfig: 35 90 12
+# description: prometheus-nats-exporter
+#
+
+# Get function from functions library
+. /etc/init.d/functions
+
+# Start the service prometheus-nats-exporter
+start() {
+        initlog -c "echo -n Starting server: "
+        /usr/local/bin/prometheus-nats-exporter &
+
+        touch /var/lock/subsys/prometheus-nats-exporter
+        success $"prometheus-nats-exporter server startup"
+        echo
+}
+
+# Restart the service prometheus-nats-exporter
+stop() {
+        initlog -c "echo -n Stopping prometheus-nats-exporter server: "
+        killproc prometheus-nats-exporter
+
+        rm -f /var/lock/subsys/prometheus-nats-exporter
+        echo
+}
+
+### main logic ###
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status prometheus-nats-exporter
+        ;;
+  restart|reload|condrestart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+
+exit 0
