@@ -1,0 +1,56 @@
+#+TITLE: NATS Rest Config Proxy
+
+#+BEGIN_SRC sh :results output
+curl -X PUT http://127.0.0.1:4567/v1/auth/perms/guest -d '{
+ "publish": {
+   "allow": ["foo.*", "bar.>"]
+  },
+  "subscribe": {
+    "deny": ["quux"]
+  }
+}'
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X PUT http://127.0.0.1:4567/v1/auth/perms/admin -d '{
+ "publish": {
+   "allow": [">"]
+  },
+  "subscribe": {
+    "allow": [">"]
+  }
+}'
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X PUT http://127.0.0.1:4567/v1/auth/idents/foo-1-user -d '{
+  "username": "CN=acme.example.com,OU=ACME",
+  "permissions": "guest",
+  "account": "Foo"
+}'
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X PUT http://127.0.0.1:4567/v1/auth/idents/cncf-user -d '{
+  "username": "CN=cncf.example.com,OU=CNCF",
+  "permissions": "guest",
+  "account": "Bar"
+}'
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X PUT http://127.0.0.1:4567/v1/auth/idents/sys-user -d '{
+  "username": "sys",
+  "permissions": "admin",
+  "account": "$SYS"
+}'
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X POST http://127.0.0.1:4567/v1/auth/snapshot?name=v1
+#+END_SRC
+
+#+BEGIN_SRC sh
+curl -X POST http://127.0.0.1:4567/v1/auth/publish
+#+END_SRC
+
