@@ -9,7 +9,7 @@
 
 # Start the service prometheus-nats-exporter
 start() {
-        initlog -c "echo -n Starting prometheus-nats-exporter server: "
+        echo -n "Starting prometheus-nats-exporter server: "
         /usr/local/bin/prometheus-nats-exporter &
 
         touch /var/lock/subsys/prometheus-nats-exporter
@@ -19,7 +19,7 @@ start() {
 
 # Restart the service prometheus-nats-exporter
 stop() {
-        initlog -c "echo -n Stopping prometheus-nats-exporter server: "
+        echo -n "Stopping prometheus-nats-exporter server: "
         killproc prometheus-nats-exporter
 
         rm -f /var/lock/subsys/prometheus-nats-exporter

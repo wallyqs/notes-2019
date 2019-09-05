@@ -9,7 +9,7 @@
 
 # Start the service nats-server
 start() {
-        initlog -c "echo -n Starting nats-server"
+        echo -n "Starting nats-server"
         /usr/local/bin/nats-server &
 
         touch /var/lock/subsys/nats-server
@@ -19,7 +19,7 @@ start() {
 
 # Restart the service nats-server
 stop() {
-        initlog -c "echo -n Stopping nats-server server: "
+        echo -n "Stopping nats-server server: "
         killproc nats-server
 
         rm -f /var/lock/subsys/nats-server

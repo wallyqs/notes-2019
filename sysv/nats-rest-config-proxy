@@ -9,7 +9,7 @@
 
 # Start the service nats-rest-config-proxy
 start() {
-        initlog -c "echo -n Starting nats-rest-config-proxy server: "
+        echo -n "Starting nats-rest-config-proxy server: "
         /usr/local/bin/nats-rest-config-proxy &
 
         touch /var/lock/subsys/nats-rest-config-proxy
@@ -19,7 +19,7 @@ start() {
 
 # Restart the service nats-rest-config-proxy
 stop() {
-        initlog -c "echo -n Stopping nats-rest-config-proxy server: "
+        echo -n "Stopping nats-rest-config-proxy server:"
         killproc nats-rest-config-proxy
 
         rm -f /var/lock/subsys/nats-rest-config-proxy
